@@ -17,6 +17,9 @@ softmax_out = nn.Softmax(dim=2)
 (32, 801, 3). Label should be one hot, using mapping = dict{’english ’: 0, ’hindi ’: 1, ’mandarin’: 2} 
 - Ex. if a frame is labeled as english, then it should be 1 in index 0 and 0 in the other indices.
 
+- Create label: 
+    lan_label = np.full(shape=(N_lan,sequence_length,3), fill_value=np.array([int(i == mapping[language]) for i in range(3)]))
+
 2.3. Sample code for dataset and dataloader.
 
 - Ex.
