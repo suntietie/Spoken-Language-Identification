@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
-from utils import Config, plot_epoch
 
 
 ### MODEL
@@ -23,7 +22,6 @@ class Model(nn.Module):
         self.hidden_size = hidden_size
         self.output_size = output_size
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        ## GRU with two layer of hidden layer
         self.rnn = nn.GRU(self.input_size, self.hidden_size, num_layers=4, dropout=0.3, batch_first=True).to(self.device)
         ## full connected layer
         self.fc = nn.Linear(self.hidden_size, self.output_size).to(self.device)
@@ -50,5 +48,5 @@ num_feature = 64
 hidden_size = 64
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-gru_model = Model(input_size=num_feature, hidden_size=hidden_size, output_size=3).to(device)
+model = Model(input_size=num_feature, hidden_size=hidden_size, output_size=3).to(device)
 
